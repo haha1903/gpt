@@ -58,6 +58,7 @@ struct Opt {
 
 #[derive(Debug, Deserialize)]
 struct Config {
+    url: String,
     key: String,
     prompt: String,
 }
@@ -118,7 +119,7 @@ async fn main() {
         ]),
     };
 
-    let res = client.post("https://haigpt.shop/v1/chat/completions")
+    let res = client.post(config.url)
         .header("Authorization", format!("Bearer {}", config.key))
         .json(&data)
         .send()
